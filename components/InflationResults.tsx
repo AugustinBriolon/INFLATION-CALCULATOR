@@ -22,7 +22,7 @@ export default function InflationResults() {
   useGSAP(() => {
     if (!isReady || hasAnimated) return;
 
-    gsap.fromTo(
+    gsap.from(
       [
         cardsRef.montant.current,
         cardsRef.difference.current,
@@ -32,14 +32,9 @@ export default function InflationResults() {
       {
         autoAlpha: 0,
         filter: 'blur(10px)',
-        y: 50,
-      },
-      {
-        autoAlpha: 1,
-        filter: 'blur(0px)',
-        y: 0,
+        y: 25,
         duration: 0.5,
-        stagger: 0.1,
+        stagger: 0.08,
         ease: 'power1.inOut',
         onComplete: () => setHasAnimated(true),
       }

@@ -8,8 +8,10 @@ import {
 } from '@/components/ui/select';
 import { Slider } from '@/components/ui/slider';
 import { useApp } from '@/context/AppContext';
+import { useGSAP } from '@gsap/react';
 import NumberFlow from '@number-flow/react';
-import { useMemo, useState } from 'react';
+import gsap from 'gsap';
+import { useMemo, useRef, useState } from 'react';
 
 type YearFlowProps = {
   minYear?: number;
@@ -25,6 +27,10 @@ export default function YearFlow({
   onChange,
 }: YearFlowProps) {
   const app = useApp();
+  const tableRefs = {
+    amount: useRef(null),
+    years: useRef(null),
+  }
 
   const years = useMemo(() => {
     const arr: number[] = [];
@@ -58,10 +64,31 @@ export default function YearFlow({
       onChange({ year1: Number(year1), year2: Number(v), amount });
   }
 
+  useGSAP(() => {
+    if(!tableRefs.amount.current || !tableRefs.years.current) return;
+
+    gsap.fromTo(
+      [tableRefs.amount.current, tableRefs.years.current],
+      {
+        autoAlpha: 0,
+        filter: 'blur(10px)',
+        y: 25,
+      },
+      {
+        autoAlpha: 1,
+        filter: 'blur(0px)',
+        y: 0,
+        stagger: 0.08,
+        duration: 0.5,
+        ease: 'power1.inOut',
+      }
+    )
+  })
+
   return (
     <div className='w-full max-w-3xl mx-auto space-y-16 my-32'>
-      <div className='text-center space-y-3'>
-        <div className='text-sm text-muted-foreground'>INITIAL AMOUNT</div>
+      <div ref={tableRefs.amount} className='text-center space-y-3'>
+        <div className='text-sm text-muted-foreground'>MONTANT INITIAL</div>
         <div className='text-6xl md:text-7xl tracking-tight'>
           <NumberFlow
             className='font-mono'
@@ -83,12 +110,12 @@ export default function YearFlow({
         />
       </div>
 
-      <div className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+      <div ref={tableRefs.years} className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
         <div className='flex flex-col gap-2'>
-          <Label>YEAR 1</Label>
+          <Label>ANNÉE 1</Label>
           <Select value={year1} onValueChange={handleYear1Change}>
             <SelectTrigger className='w-full'>
-              <SelectValue placeholder='SELECT A YEAR' />
+              <SelectValue placeholder='CHOISIR UNE ANNÉE' />
             </SelectTrigger>
             <SelectContent className='max-h-72'>
               {years.map((y) => (
@@ -100,10 +127,10 @@ export default function YearFlow({
           </Select>
         </div>
         <div className='flex flex-col gap-2'>
-          <Label>YEAR 2</Label>
+          <Label>ANNÉE 2</Label>
           <Select value={year2} onValueChange={handleYear2Change}>
             <SelectTrigger className='w-full'>
-              <SelectValue placeholder='SELECT A YEAR' />
+              <SelectValue placeholder='CHOISIR UNE ANNÉE' />
             </SelectTrigger>
             <SelectContent className='max-h-72'>
               {[...years].reverse().map((y) => (

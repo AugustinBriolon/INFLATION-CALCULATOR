@@ -5,17 +5,31 @@ import {
   PopoverTrigger,
 } from '@/components/ui/popover';
 import { COUNTRIES, Country } from '@/lib/countries';
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { useApp } from '@/context/AppContext';
+import { useGSAP } from '@gsap/react';
+import gsap from 'gsap';
 
 export default function CountrySelector() {
   const { selectedCountry, setSelectedCountry } = useApp();
+  const selectRef = useRef(null);
   const [isOpen, setIsOpen] = useState(false);
-
   const currentCountry = COUNTRIES[selectedCountry];
 
+  useGSAP(() => {
+    if(!selectRef.current) return;
+
+    gsap.from(selectRef.current, {
+      autoAlpha: 0,
+      scale: 0.9,
+      delay: .5,
+      duration: .2,
+      ease: 'power1.inOut'
+    })
+  })
+
   return (
-    <div className='fixed bottom-8 right-8 z-10'>
+    <div ref={selectRef} className='fixed bottom-8 right-8 z-10'>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
           <Button
