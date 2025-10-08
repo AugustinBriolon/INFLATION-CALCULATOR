@@ -44,68 +44,70 @@ export default function InflationResults() {
   if (!result && !isReady) return null;
 
   return (
-    <div className='grid grid-cols-1 md:grid-cols-3 gap-4'>
-      <Card ref={cardsRef.montant} className='stat-card'>
-        <CardContent className='h-full flex flex-col justify-center'>
-          <div className='text-sm text-gray-600'>VALEUR ACTUELLE</div>
-          <div className='text-xl md:text-3xl font-medium tracking-tight'>
-            <NumberFlow
-              value={result?.adjustedAmount ?? 0}
-              format={{
-                style: 'currency',
-                currency: currencyCode,
-                currencyDisplay: 'symbol',
-                maximumFractionDigits:
-                  (result?.adjustedAmount ?? 0) > 10 ? 0 : 1,
-              }}
-            />
-          </div>
+    <div className='space-y-4'>
+      <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
+        <Card ref={cardsRef.montant} className='stat-card'>
+          <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
+            <div className='text-sm text-gray-600'>VALEUR ACTUELLE</div>
+            <div className='text-xl md:text-3xl font-medium tracking-tight'>
+              <NumberFlow
+                value={result?.adjustedAmount ?? 0}
+                format={{
+                  style: 'currency',
+                  currency: currencyCode,
+                  currencyDisplay: 'symbol',
+                  maximumFractionDigits:
+                    (result?.adjustedAmount ?? 0) > 10 ? 0 : 1,
+                }}
+              />
+            </div>
 
-          <div className='text-xs text-muted-foreground mt-1'>
-            Ce que vaut aujourd'hui votre argent
-          </div>
-        </CardContent>
-      </Card>
-      <Card ref={cardsRef.difference} className='stat-card'>
-        <CardContent className='h-full flex flex-col justify-center'>
-          <div className='text-sm text-gray-600'>PERTE DE VALEUR</div>
-          <div className='text-xl md:text-3xl font-medium tracking-tight'>
-            <NumberFlow
-              value={Math.abs(result?.pctChange ?? 0) / 100}
-              format={{
-                style: 'percent',
-                maximumFractionDigits:
-                  (result?.pctChange ?? 0) > 10 ? 0 : 1,
-              }}
-            />
-          </div>
-          <div className='text-xs text-muted-foreground mt-1'>
-            Votre argent a perdu cette valeur
-          </div>
-        </CardContent>
-      </Card>
-      <Card ref={cardsRef.cpi} className='stat-card'>
-        <CardContent className='h-full flex flex-col justify-center'>
-          <div className='text-sm text-gray-600'>INFLATION TOTALE</div>
-          <div className='text-xl md:text-3xl font-medium tracking-tight'>
-            <NumberFlow
-              value={(result?.inflationRate ?? 0) / 100}
-              format={{
-                style: 'percent',
-                maximumFractionDigits:
-                  (result?.inflationRate ?? 0) > 10 ? 0 : 1,
-              }}
-            />
-          </div>
-          <div className='text-xs text-muted-foreground mt-1'>
-            Sur toute la période
-          </div>
-        </CardContent>
-      </Card>
-      <Card
-        ref={cardsRef.chart}
-        className='h-fit w-full rounded-lg border p-2 col-span-3'
-      >
+            <div className='text-xs text-muted-foreground mt-1'>
+              Ce que vaut aujourd'hui votre argent
+            </div>
+          </CardContent>
+        </Card>
+        <Card ref={cardsRef.difference} className='stat-card'>
+          <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
+            <div className='text-sm text-gray-600'>PERTE DE VALEUR</div>
+            <div className='text-xl md:text-3xl font-medium tracking-tight'>
+              <NumberFlow
+                value={Math.abs(result?.pctChange ?? 0) / 100}
+                format={{
+                  style: 'percent',
+                  maximumFractionDigits: (result?.pctChange ?? 0) > 10 ? 0 : 1,
+                }}
+              />
+            </div>
+            <div className='text-xs text-muted-foreground mt-1'>
+              Votre argent a perdu cette valeur
+            </div>
+          </CardContent>
+        </Card>
+        <Card
+          ref={cardsRef.cpi}
+          className='stat-card sm:col-span-2 lg:col-span-1'
+        >
+          <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
+            <div className='text-sm text-gray-600'>INFLATION TOTALE</div>
+            <div className='text-xl md:text-3xl font-medium tracking-tight'>
+              <NumberFlow
+                value={(result?.inflationRate ?? 0) / 100}
+                format={{
+                  style: 'percent',
+                  maximumFractionDigits:
+                    (result?.inflationRate ?? 0) > 10 ? 0 : 1,
+                }}
+              />
+            </div>
+            <div className='text-xs text-muted-foreground mt-1'>
+              Sur toute la période
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+
+      <Card ref={cardsRef.chart} className='h-fit w-full rounded-lg border p-2'>
         <ChartContainer
           config={{
             value: {
