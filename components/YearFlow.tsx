@@ -59,7 +59,7 @@ export default function YearFlow({
   }
 
   return (
-    <div className='w-full max-w-3xl mx-auto space-y-16'>
+    <div className='w-full max-w-3xl mx-auto space-y-16 my-32'>
       <div className='text-center space-y-3'>
         <div className='text-sm text-muted-foreground'>INITIAL AMOUNT</div>
         <div className='text-6xl md:text-7xl tracking-tight'>

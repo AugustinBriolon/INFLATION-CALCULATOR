@@ -6,22 +6,16 @@ import {
 } from '@/components/ui/popover';
 import { COUNTRIES, Country } from '@/lib/countries';
 import { useState } from 'react';
+import { useApp } from '@/context/AppContext';
 
-interface CountrySelectorProps {
-  selectedCountry: Country;
-  onCountryChange: (country: Country) => void;
-}
-
-export default function CountrySelector({
-  selectedCountry,
-  onCountryChange,
-}: CountrySelectorProps) {
+export default function CountrySelector() {
+  const { selectedCountry, setSelectedCountry } = useApp();
   const [isOpen, setIsOpen] = useState(false);
 
   const currentCountry = COUNTRIES[selectedCountry];
 
   return (
-    <div className='fixed bottom-8 right-8 z-50'>
+    <div className='fixed bottom-8 right-8 z-10'>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
           <Button
@@ -45,7 +39,7 @@ export default function CountrySelector({
                 variant={selectedCountry === country.code ? 'default' : 'ghost'}
                 className='flex items-center justify-between gap-0 w-full px-3 py-1'
                 onClick={() => {
-                  onCountryChange(country.code);
+                  setSelectedCountry(country.code);
                   setIsOpen(false);
                 }}
               >
