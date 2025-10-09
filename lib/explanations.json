@@ -1,0 +1,14 @@
+{
+  "valeurActuelle": {
+    "title": "Valeur Actuelle",
+    "description": "Cette valeur représente le pouvoir d'achat actuel de votre argent d'origine. Elle montre combien votre montant initial vaut aujourd'hui en tenant compte de l'inflation cumulée sur la période sélectionnée. Plus cette valeur est faible par rapport à votre montant initial, plus l'inflation a érodé votre pouvoir d'achat."
+  },
+  "perteDeValeur": {
+    "title": "Perte de Valeur",
+    "description": "Ce pourcentage indique la perte de pouvoir d'achat de votre argent due à l'inflation. Par exemple, si vous voyez 25%, cela signifie que votre argent a perdu 25% de sa valeur d'achat au cours de la période. Cette métrique vous aide à comprendre l'impact réel de l'inflation sur vos économies et l'importance d'investir pour préserver votre patrimoine."
+  },
+  "inflationTotale": {
+    "title": "Inflation Totale",
+    "description": "Ce pourcentage représente l'inflation cumulée sur toute la période sélectionnée. Il s'agit de l'augmentation totale des prix des biens et services depuis votre date de départ jusqu'à aujourd'hui. Cette donnée est calculée à partir de l'indice des prix à la consommation (IPC) et reflète l'évolution du coût de la vie dans le pays choisi."
+  }
+}

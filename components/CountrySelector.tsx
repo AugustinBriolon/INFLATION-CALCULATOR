@@ -19,9 +19,12 @@ export default function CountrySelector() {
   useGSAP(() => {
     if(!selectRef.current) return;
 
-    gsap.from(selectRef.current, {
+    gsap.fromTo(selectRef.current, {
       autoAlpha: 0,
       scale: 0.9,
+    }, {
+      autoAlpha: 1,
+      scale: 1,
       delay: .5,
       duration: .2,
       ease: 'power1.inOut'
@@ -29,7 +32,7 @@ export default function CountrySelector() {
   })
 
   return (
-    <div ref={selectRef} className='fixed bottom-8 right-8 z-10'>
+    <div ref={selectRef} className='fixed bottom-8 right-8 z-10 opacity-0'>
       <Popover open={isOpen} onOpenChange={setIsOpen}>
         <PopoverTrigger asChild>
           <Button

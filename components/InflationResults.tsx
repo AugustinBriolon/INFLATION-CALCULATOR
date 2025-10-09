@@ -7,6 +7,8 @@ import gsap from 'gsap';
 import { useRef, useState } from 'react';
 import { Line, LineChart, XAxis, YAxis } from 'recharts';
 import { ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart';
+import StatExplanationModal from './StatExplanationModal';
+import explanations from '@/lib/explanations.json';
 
 export default function InflationResults() {
   const { isReady, result, chartSeries, currencyCode } = useInflation();
@@ -46,9 +48,15 @@ export default function InflationResults() {
   return (
     <div className='space-y-4'>
       <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4'>
-        <Card ref={cardsRef.montant} className='stat-card'>
+        <Card ref={cardsRef.montant} className='stat-card py-0'>
           <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
-            <div className='text-sm text-gray-600'>VALEUR ACTUELLE</div>
+            <div className='flex items-center justify-between'>
+              <div className='text-sm text-gray-600'>VALEUR ACTUELLE</div>
+              <StatExplanationModal
+                title={explanations.valeurActuelle.title}
+                description={explanations.valeurActuelle.description}
+              />
+            </div>
             <div className='text-xl md:text-3xl font-medium tracking-tight'>
               <NumberFlow
                 value={result?.adjustedAmount ?? 0}
@@ -67,9 +75,15 @@ export default function InflationResults() {
             </div>
           </CardContent>
         </Card>
-        <Card ref={cardsRef.difference} className='stat-card'>
+        <Card ref={cardsRef.difference} className='stat-card py-0'>
           <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
-            <div className='text-sm text-gray-600'>PERTE DE VALEUR</div>
+            <div className='flex items-center justify-between'>
+              <div className='text-sm text-gray-600'>PERTE DE VALEUR</div>
+              <StatExplanationModal
+                title={explanations.perteDeValeur.title}
+                description={explanations.perteDeValeur.description}
+              />
+            </div>
             <div className='text-xl md:text-3xl font-medium tracking-tight'>
               <NumberFlow
                 value={Math.abs(result?.pctChange ?? 0) / 100}
@@ -86,10 +100,16 @@ export default function InflationResults() {
         </Card>
         <Card
           ref={cardsRef.cpi}
-          className='stat-card sm:col-span-2 lg:col-span-1'
+          className='stat-card py-0 sm:col-span-2 lg:col-span-1'
         >
           <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
-            <div className='text-sm text-gray-600'>INFLATION TOTALE</div>
+            <div className='flex items-center justify-between'>
+              <div className='text-sm text-gray-600'>INFLATION TOTALE</div>
+              <StatExplanationModal
+                title={explanations.inflationTotale.title}
+                description={explanations.inflationTotale.description}
+              />
+            </div>
             <div className='text-xl md:text-3xl font-medium tracking-tight'>
               <NumberFlow
                 value={(result?.inflationRate ?? 0) / 100}
@@ -107,7 +127,10 @@ export default function InflationResults() {
         </Card>
       </div>
 
-      <Card ref={cardsRef.chart} className='h-fit w-full rounded-lg border p-2'>
+      <Card
+        ref={cardsRef.chart}
+        className='h-fit w-full rounded-lg border pr-8 py-8'
+      >
         <ChartContainer
           config={{
             value: {

@@ -87,7 +87,7 @@ export default function YearFlow({
 
   return (
     <div className='w-full max-w-3xl mx-auto space-y-16 my-32'>
-      <div ref={tableRefs.amount} className='text-center space-y-3'>
+      <div ref={tableRefs.amount} className='text-center space-y-3 opacity-0'>
         <div className='text-sm text-muted-foreground'>MONTANT INITIAL</div>
         <div className='text-6xl md:text-7xl tracking-tight'>
           <NumberFlow
@@ -110,7 +110,7 @@ export default function YearFlow({
         />
       </div>
 
-      <div ref={tableRefs.years} className='grid grid-cols-1 sm:grid-cols-2 gap-6'>
+      <div ref={tableRefs.years} className='grid grid-cols-1 sm:grid-cols-2 gap-6 opacity-0'>
         <div className='flex flex-col gap-2'>
           <Label>ANNÉE 1</Label>
           <Select value={year1} onValueChange={handleYear1Change}>
