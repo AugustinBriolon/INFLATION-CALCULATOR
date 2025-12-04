@@ -8,15 +8,15 @@ import {
   DialogTrigger,
 } from '@/components/ui/dialog';
 
-type StatExplanationModalProps = {
+type SimpleModalProps = {
   title: string;
   description: string;
 };
 
-export default function StatExplanationModal({
+export default function SimpleModal({
   title,
   description,
-}: StatExplanationModalProps) {
+}: SimpleModalProps) {
   return (
     <Dialog>
       <DialogTrigger className='cursor-pointer'>
@@ -26,8 +26,8 @@ export default function StatExplanationModal({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle className='text-left'>{title}</DialogTitle>
-          <DialogDescription className='mt-4 text-left'>{description}</DialogDescription>
+          <DialogTitle className='text-left text-xl font-bold'>{title}</DialogTitle>
+          <DialogDescription className='mt-4 text-left text-sm'>{description}</DialogDescription>
         </DialogHeader>
       </DialogContent>
     </Dialog>

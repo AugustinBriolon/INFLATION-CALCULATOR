@@ -6,12 +6,12 @@ import NumberFlow from '@number-flow/react';
 import gsap from 'gsap';
 import { useRef, useState } from 'react';
 import { Line, LineChart, XAxis, YAxis } from 'recharts';
-import { ChartContainer, ChartTooltip, ChartTooltipContent } from './ui/chart';
-import StatExplanationModal from './StatExplanationModal';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '../ui/chart';
+import SimpleModal from '../modal/SimpleModal';
 import explanations from '@/lib/explanations.json';
 
-export default function InflationResults() {
-  const { isReady, result, chartSeries, currencyCode } = useInflation();
+export default function StatsResults() {
+  const { result, chartSeries, currencyCode } = useInflation();
   const [hasAnimated, setHasAnimated] = useState(false);
 
   const cardsRef = {
@@ -22,7 +22,7 @@ export default function InflationResults() {
   };
 
   useGSAP(() => {
-    if (!isReady || hasAnimated) return;
+    if (hasAnimated) return;
 
     gsap.from(
       [
@@ -41,9 +41,9 @@ export default function InflationResults() {
         onComplete: () => setHasAnimated(true),
       }
     );
-  }, [isReady, hasAnimated]);
+  }, [hasAnimated]);
 
-  if (!result && !isReady) return null;
+  if (!result) return null;
 
   return (
     <div className='space-y-4'>
@@ -51,8 +51,8 @@ export default function InflationResults() {
         <Card ref={cardsRef.montant} className='stat-card py-0'>
           <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
             <div className='flex items-center justify-between'>
-              <div className='text-sm text-gray-600'>VALEUR ACTUELLE</div>
-              <StatExplanationModal
+              <span className='text-sm text-gray-600'>VALEUR ACTUELLE</span>
+              <SimpleModal
                 title={explanations.valeurActuelle.title}
                 description={explanations.valeurActuelle.description}
               />
@@ -70,16 +70,16 @@ export default function InflationResults() {
               />
             </div>
 
-            <div className='text-xs text-muted-foreground mt-1'>
+            <span className='text-xs text-muted-foreground mt-1'>
               Ce que vaut aujourd'hui votre argent
-            </div>
+            </span>
           </CardContent>
         </Card>
         <Card ref={cardsRef.difference} className='stat-card py-0'>
           <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
             <div className='flex items-center justify-between'>
-              <div className='text-sm text-gray-600'>PERTE DE VALEUR</div>
-              <StatExplanationModal
+              <span className='text-sm text-gray-600'>PERTE DE VALEUR</span>
+              <SimpleModal
                 title={explanations.perteDeValeur.title}
                 description={explanations.perteDeValeur.description}
               />
@@ -93,9 +93,9 @@ export default function InflationResults() {
                 }}
               />
             </div>
-            <div className='text-xs text-muted-foreground mt-1'>
+            <span className='text-xs text-muted-foreground mt-1'>
               Votre argent a perdu cette valeur
-            </div>
+            </span>
           </CardContent>
         </Card>
         <Card
@@ -104,8 +104,8 @@ export default function InflationResults() {
         >
           <CardContent className='h-full flex flex-col justify-center p-4 sm:p-6'>
             <div className='flex items-center justify-between'>
-              <div className='text-sm text-gray-600'>INFLATION TOTALE</div>
-              <StatExplanationModal
+              <span className='text-sm text-gray-600'>INFLATION TOTALE</span>
+              <SimpleModal
                 title={explanations.inflationTotale.title}
                 description={explanations.inflationTotale.description}
               />
@@ -120,9 +120,9 @@ export default function InflationResults() {
                 }}
               />
             </div>
-            <div className='text-xs text-muted-foreground mt-1'>
+            <span className='text-xs text-muted-foreground mt-1'>
               Sur toute la période
-            </div>
+            </span>
           </CardContent>
         </Card>
       </div>

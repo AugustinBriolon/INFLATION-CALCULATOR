@@ -1,0 +1,72 @@
+{
+  "baguette": {
+    "name": "Baguette de pain",
+    "icon": "🥖",
+    "priceToday": 1.20,
+    "unit": "pièce",
+    "description": "Pain traditionnel français"
+  },
+  "cafe": {
+    "name": "Café au bar",
+    "icon": "☕",
+    "priceToday": 2.50,
+    "unit": "tasse",
+    "description": "Expresso au comptoir"
+  },
+  "cinema": {
+    "name": "Place de cinéma",
+    "icon": "🎬",
+    "priceToday": 12.00,
+    "unit": "place",
+    "description": "Séance en salle"
+  },
+  "essence": {
+    "name": "Essence",
+    "icon": "⛽",
+    "priceToday": 1.80,
+    "unit": "litre",
+    "description": "Carburant SP95"
+  },
+  "metro": {
+    "name": "Ticket de métro",
+    "icon": "🚇",
+    "priceToday": 2.10,
+    "unit": "ticket",
+    "description": "Transport public"
+  },
+  "croissant": {
+    "name": "Croissant",
+    "icon": "🥐",
+    "priceToday": 1.10,
+    "unit": "pièce",
+    "description": "Viennoiserie traditionnelle"
+  },
+  "journal": {
+    "name": "Journal",
+    "icon": "📰",
+    "priceToday": 2.20,
+    "unit": "exemplaire",
+    "description": "Quotidien national"
+  },
+  "biere": {
+    "name": "Bière au bar",
+    "icon": "🍺",
+    "priceToday": 4.50,
+    "unit": "demi",
+    "description": "Bière pression 25cl"
+  },
+  "cigarettes": {
+    "name": "Paquet de cigarettes",
+    "icon": "🚬",
+    "priceToday": 10.50,
+    "unit": "paquet",
+    "description": "Tabac manufacturé"
+  },
+  "lait": {
+    "name": "Lait",
+    "icon": "🥛",
+    "priceToday": 1.15,
+    "unit": "litre",
+    "description": "Lait entier UHT"
+  }
+}

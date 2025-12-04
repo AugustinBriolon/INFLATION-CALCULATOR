@@ -1,5 +1,5 @@
 import CountrySelector from '@/components/CountrySelector';
-import InflationResults from '@/components/InflationResults';
+import InflationResults from '@/components/results/InflationResults';
 import YearFlow from '@/components/YearFlow';
 
 export default function Home() {

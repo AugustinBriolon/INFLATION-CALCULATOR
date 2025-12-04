@@ -104,7 +104,7 @@ export default function YearFlow({
         <Slider
           value={[amount]}
           min={10}
-          max={1000000}
+          max={1000}
           step={10}
           onValueChange={(vals) => handleAmountChange(vals[0] ?? amount)}
         />
